@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
+    tools:context="com.example.franciscoandrade.googlehome.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/imageGoogle"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/googlelogo"
+            android:layout_gravity="center"
+            android:onClick="onClick"/>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:elevation="100dp"
+            card_view:cardCornerRadius="3dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:foreground="?android:selectableItemBackground">
+
+            <EditText
+                android:id="@+id/searchET"
+                android:layout_gravity="center"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:hint="G"
+                android:inputType="text"
+
+                android:textColorHint="#448AFF"
+                />
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/buttton_floatWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_background"
+                app:fabSize="normal"
+                app:backgroundTint="@android:color/white"
+                app:rippleColor="@android:color/black"
+                app:borderWidth="0dp"
+                app:elevation="2dp"
+                android:scaleType="center"
+                app:pressedTranslationZ="12dp"
+                android:onClick="onClick"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weather"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp">
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/buttton_floatTodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/note_layout"
+                app:fabSize="normal"
+                app:backgroundTint="@android:color/white"
+                app:rippleColor="@android:color/black"
+                app:borderWidth="0dp"
+                app:elevation="2dp"
+                android:scaleType="center"
+                app:pressedTranslationZ="12dp"
+                android:onClick="onClick"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TODO"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_gravity="center"
+        android:layout_height="2dp"
+        android:background="#448AFF"
+        android:layout_margin="10dp"/>
+
+
+    <TextView
+        android:id="@+id/newsTitleTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="THE VERGE NEWS"
+        android:layout_marginBottom="5dp"
+        android:textSize="17dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerHomeNews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
