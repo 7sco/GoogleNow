@@ -9,7 +9,6 @@ import retrofit2.http.GET;
 
 public interface ServiceAPI {
 
-    @GET("everything?sources=the-verge&apiKey=bb9882ead46d4fb4a8c5c158a3754d85")
+    @GET("top-headlines?sources=google-news&apiKey=e267d9189dee4f41a1243eb98b33933b")
     Call<GetArticles> getResponseGet();
-
 }

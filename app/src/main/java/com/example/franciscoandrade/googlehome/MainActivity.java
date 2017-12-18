@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -21,6 +22,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.franciscoandrade.googlehome.newsPackage.Article;
+import com.example.franciscoandrade.googlehome.newsPackage.SoccerAPI;
+import com.example.franciscoandrade.googlehome.newsPackage.SoccerNews;
+import com.example.franciscoandrade.googlehome.newsPackage.SoccerNewsAdapter;
 import com.example.franciscoandrade.googlehome.weatherPackage.Weatherctivity;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
     EditText            searchET;
     FloatingActionButton buttton_floatWeather;
 
+    private static final String TAG = "JSON?";
+
+    private static final String  url= "https://newsapi.org/v2/";
+
+    private SoccerAPI sportsNewsService;
+    private List<Article> sportNewsArticlesList;
+
 
 
     @Override
@@ -49,9 +62,12 @@ public class MainActivity extends AppCompatActivity {
         searchET        =(EditText)findViewById(R.id.searchET);
         new Peticion().execute();
         timer();
-        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         keyTextListener();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerSportsNews);
+        retrofitCall("https://newsapi.org/v2/");
     }
 
     private void timer() {
@@ -109,11 +125,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void retrofitCall(String baseUrl) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        sportsNewsService = retrofit.create(SoccerAPI.class);
+
+        Call<SoccerNews> soccerNewsCall = sportsNewsService.getNews();
+
+        soccerNewsCall.enqueue(new Callback<SoccerNews>() {//call the website link and get information
+            @Override
+            public void onResponse(Call<SoccerNews> call, Response<SoccerNews> response) {
+                sportNewsArticlesList = response.body().getArticleList();
+//////                int x= sportNewsUrl.getArticleList().size();
+                ///     Log.e(TAG, String.valueOf(x));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL, false));
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setAdapter(new SoccerNewsAdapter(sportNewsArticlesList));
+            }
+
+            @Override
+            public void onFailure(Call<SoccerNews> call, Throwable t) {
+                t.printStackTrace();
+            }
+
+        });
+    }
+
     public  class Peticion extends AsyncTask<Void, String, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String  url="https://newsapi.org/v2/";
 
             Retrofit retrofit= new Retrofit.Builder()
                     .baseUrl(url)
@@ -151,4 +196,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
         }
     }
+
+
 }
