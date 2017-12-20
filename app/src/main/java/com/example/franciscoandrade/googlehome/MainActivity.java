@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        swipeRefresh= (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        //swipeRefresh= (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
 
         recyclerView    =(RecyclerView)findViewById(R.id.recyclerHomeNews);
         searchET        =(EditText)findViewById(R.id.searchET);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         keyTextListener();
 
 
-        swipeRefresh.setOnRefreshListener(this);
+//        git status.setOnRefreshListener(this);
 
         buttton_floatWeather= (FloatingActionButton)findViewById(R.id.buttton_floatWeather);
         buttton_floatTodo= (FloatingActionButton)findViewById(R.id.buttton_floatTodo);
