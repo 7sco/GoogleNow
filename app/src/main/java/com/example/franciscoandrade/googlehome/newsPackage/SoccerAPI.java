@@ -8,6 +8,6 @@ import retrofit2.http.GET;
  */
 
 public interface SoccerAPI {
-    @GET("top-headlines?sources=bbc-sport&apiKey=e267d9189dee4f41a1243eb98b33933b")
+    @GET("top-headlines?sources=the-sport-bible&apiKey=e267d9189dee4f41a1243eb98b33933b")
     Call<SoccerNews> getNews();
 }

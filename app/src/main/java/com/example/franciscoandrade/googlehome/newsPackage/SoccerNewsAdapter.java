@@ -50,14 +50,14 @@ public class SoccerNewsAdapter extends RecyclerView.Adapter<SoccerNewsAdapter.Vi
         Picasso.with(holder.newsBackgroundSoccer.getContext()).load(url).fit().into(holder.newsBackgroundSoccer);
         link= articleList.get(position).getUrlSoccer();
 
-//        holder.prictureCardSoccer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent= new Intent(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(link));
-//                context.startActivity(intent);
-//            }
-//        });
+        holder.prictureCardSoccer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(link));
+                context.startActivity(intent);
+            }
+        });
 
     }
 
