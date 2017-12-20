@@ -6,11 +6,11 @@
 
     android:id="@+id/prictureCard"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="170dp"
     cardview:cardCornerRadius="1dp"
     android:layout_marginBottom="10dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginLeft="5dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
     android:layout_marginTop="5dp"
     >
 
@@ -22,17 +22,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp">
+            android:layout_height="85dp">
 
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp">
+                android:layout_height="90dp">
 
                 <ImageView
                     android:id="@+id/newsBackground"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="100dp"
                     android:scaleType="centerCrop"
                     />
 
@@ -60,7 +60,7 @@
         <LinearLayout
             android:id="@+id/newsHolder"
             android:layout_width="match_parent"
-            android:layout_height="105dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             >
 
@@ -84,6 +84,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
+                    android:maxLines="3"
                     android:textAlignment="textStart"
                     tools:ignore="RtlCompat" />
 
@@ -96,16 +97,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.4"
+                android:layout_weight="0.5"
                 android:gravity="bottom"
-                android:paddingBottom="5dp"
+                android:paddingBottom="3dp"
 
                 >
 
                 <TextView
                     android:id="@+id/newsAuthor"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Title"
                     android:textAlignment="viewEnd"
                     android:paddingRight="10dp"

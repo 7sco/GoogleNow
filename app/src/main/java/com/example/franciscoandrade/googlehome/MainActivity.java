@@ -8,18 +8,22 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +32,8 @@ import com.example.franciscoandrade.googlehome.newsPackage.SoccerAPI;
 import com.example.franciscoandrade.googlehome.newsPackage.SoccerNews;
 import com.example.franciscoandrade.googlehome.newsPackage.SoccerNewsAdapter;
 import com.example.franciscoandrade.googlehome.weatherPackage.Weatherctivity;
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -44,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
     Context             context=this;
     List<GetArticles>   listData=new ArrayList<>();
     EditText            searchET;
-    FloatingActionButton buttton_floatWeather;
+    FloatingActionButton buttton_floatWeather, buttton_floatTodo;
+
+    NewsAdapter newsAdapter;
+    SoccerNewsAdapter soccerNewsAdapter;
 
     private static final String TAG = "JSON?";
 
@@ -67,13 +76,35 @@ public class MainActivity extends AppCompatActivity {
         new Peticion().execute();
         new RetrofitCall().execute();
         timer();
-        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         LinearLayoutManager linearLayoutManager2= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(linearLayoutManager2);
 
+        SnapHelper snapHelper2 = new GravitySnapHelper(Gravity.START);
+        snapHelper2.attachToRecyclerView(recyclerView2);
 
         keyTextListener();//where is setadapter?
+
+        buttton_floatWeather= (FloatingActionButton)findViewById(R.id.buttton_floatWeather);
+        buttton_floatTodo= (FloatingActionButton)findViewById(R.id.buttton_floatTodo);
+
+        buttton_floatWeather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), Weatherctivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttton_floatTodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), ToDoList.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 
@@ -87,19 +118,21 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 // Do something after 5s = 5000ms
                 Log.d("RESULTS", "AFTER THREAD ====="+listData.size());
-                NewsAdapter newsAdapter =new NewsAdapter(listData, context);
+               newsAdapter =new NewsAdapter(listData, context);
                 recyclerView.setAdapter(newsAdapter);
 
                 //SIRAN
 
 //                recyclerView2.setHasFixedSize(true);
-                SoccerNewsAdapter soccerNewsAdapter= new SoccerNewsAdapter(sportNewsArticlesList, context);
+                soccerNewsAdapter= new SoccerNewsAdapter(sportNewsArticlesList, context);
                 recyclerView2.setAdapter(soccerNewsAdapter);//setadapter
+
+                recyclerView2.setNestedScrollingEnabled(false);
 
 
 
             }
-        }, 1000);
+        }, 2000);
     }
 
     private void keyTextListener() {
@@ -107,9 +140,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if (keyEvent.getAction()== keyEvent.ACTION_DOWN){
-
                     if(i== keyEvent.KEYCODE_ENTER && !TextUtils.isEmpty(searchET.getText())){
-
                         String url= searchET.getText().toString();
                         Intent intent= new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse("https://www.google.com/#q="+url));
@@ -117,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
                         searchET.setText("");
                     }
                 }
-
                 return false;
             }
         });
@@ -125,22 +155,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.buttton_floatWeather:
-                Intent intent=new Intent(this, Weatherctivity.class);
-                startActivity(intent);
-                break;
-            case R.id.buttton_floatTodo:
-                Toast.makeText(context, "NOT YET IMPLEMENTED", Toast.LENGTH_SHORT).show();
-                break;
 
             case R.id.imageGoogle:
-                Intent intentImage= new Intent(Intent.ACTION_VIEW);
-                intentImage.setData(Uri.parse("https://www.google.com"));
-                startActivity(intentImage);
+//                Intent intentImage= new Intent(Intent.ACTION_VIEW);
+//                intentImage.setData(Uri.parse("https://www.google.com"));
+//                startActivity(intentImage);
+
+                showSnackBar();
+
                 break;
-
-
-
         }
     }
 
@@ -183,11 +206,33 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(Call<SoccerNews> call, Throwable t) {
 
                     Log.d(TAG, "onFailure: ========");
+
+                        showSnackBar();
                 }
             });
 
             return null;
         }
+    }
+
+    private void showSnackBar() {
+
+        LinearLayout mainActivity=(LinearLayout)findViewById(R.id.mainActivity);
+        Snackbar snackbar= Snackbar.make(mainActivity, "API Connection Failed", Snackbar.LENGTH_SHORT)
+                .setAction("RELOAD", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new Peticion().execute();
+                        new RetrofitCall().execute();
+
+
+                         newsAdapter.notifyDataSetChanged();
+                         soccerNewsAdapter.notifyDataSetChanged();
+                    }
+                });
+
+        snackbar.show();
+
     }
 
     public  class Peticion extends AsyncTask<Void, String, Void> {

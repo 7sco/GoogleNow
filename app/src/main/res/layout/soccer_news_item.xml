@@ -6,11 +6,11 @@
 
     android:id="@+id/prictureCardSoccer"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="150dp"
     cardview:cardCornerRadius="1dp"
     android:layout_marginBottom="10dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginLeft="5dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:layout_marginTop="5dp"
     >
 
@@ -22,30 +22,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp">
+            android:layout_height="85dp">
 
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp">
+                android:layout_height="90dp">
 
                 <ImageView
                     android:id="@+id/newsBackgroundSoccer"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="100dp"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/ic_launcher"
                     />
 
                 <TextView
                     android:id="@+id/newsTitleSoccer"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:text="Title"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textAlignment="center"
-                    android:paddingTop="5dp"
+                    android:paddingTop="2dp"
                     android:paddingRight="5dp"
                     android:paddingLeft="5dp"
                     android:layout_gravity="bottom"
@@ -61,7 +60,7 @@
         <LinearLayout
             android:id="@+id/newsHolderSoccer"
             android:layout_width="match_parent"
-            android:layout_height="105dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             >
 
@@ -72,46 +71,42 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_marginTop="5dp"
-
                 >
 
 
                 <TextView
                     android:id="@+id/newsDescriptionSoccer"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Title"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center"
+                    android:gravity="top"
                     android:textAlignment="textStart"
                     tools:ignore="RtlCompat" />
-
-
-
-
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.4"
+                android:layout_weight="0.5"
                 android:gravity="bottom"
-                android:paddingBottom="5dp"
+                android:paddingBottom="3dp"
 
                 >
 
                 <TextView
                     android:id="@+id/newsAuthorSoccer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Title"
                     android:textAlignment="viewEnd"
                     android:paddingRight="10dp"
                     android:gravity="end"
                     android:textStyle="italic"
+
                     />
 
             </LinearLayout>
