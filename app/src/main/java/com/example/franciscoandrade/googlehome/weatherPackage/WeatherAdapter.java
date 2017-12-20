@@ -46,8 +46,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         date2= new Date(unixSeconds2*1000L);
         String time=ddf3.format(date2);
         holder.timeRV.setText(time);
-        holder.tempRV.setText(String.valueOf((int)listData.get(position).getTemperature())+"\u00b0C");
-        holder.feelsTempRV.setText(String.valueOf((int)listData.get(position).getApparentTemperature())+"\u00b0C");
+        holder.tempRV.setText(String.valueOf((int)listData.get(position).getTemperature())+"\u00b0");
+        holder.feelsTempRV.setText(String.valueOf((int)listData.get(position).getApparentTemperature())+"\u00b0");
         holder.summaryRV.setText(listData.get(position).getSummary()+"");
 
         switch (listData.get(position).getIcon()){

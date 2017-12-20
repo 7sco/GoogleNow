@@ -5,12 +5,17 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.franciscoandrade.googlehome.R;
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -68,8 +73,23 @@ public class Weatherctivity extends AppCompatActivity {
             }
         }, 1000);
 
+//        SnapHelper snapHelper = new LinearSnapHelper();
+//        snapHelper.attachToRecyclerView(recyclerView);
+        SnapHelper snapHelper2 = new GravitySnapHelper(Gravity.START);
+        snapHelper2.attachToRecyclerView(recyclerView);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        iconIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Peticion().execute();
+
+                weatherAdapter.notifyDataSetChanged();
+            }
+        });
+
 
     }
 
@@ -184,8 +204,8 @@ public class Weatherctivity extends AppCompatActivity {
             summaryHour.setText(values[1] + "");
             summaryNow.setText(values[2]);
             currentDate.setText(values[3]);
-            currentTemp.setText(values[4] + "\u00b0C");
-            feelsTemp.setText(values[5] + "\u00b0C");
+            currentTemp.setText(values[4] + "\u00b0");
+            feelsTemp.setText(values[5] + "\u00b0");
         }
 
         @Override

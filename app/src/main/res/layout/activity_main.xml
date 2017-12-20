@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainActivity"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -128,37 +129,77 @@
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="70dp"
-        android:layout_gravity="center"
-        android:layout_height="2dp"
-        android:background="#448AFF"
-        android:layout_margin="10dp"/>
-
-
-    <TextView
-        android:id="@+id/newsTitleTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="THE VERGE NEWS"
-        android:layout_marginBottom="5dp"
-        android:textSize="17dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerHomeNews"
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+        android:scrollIndicators="none">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_gravity="center"
+                android:layout_height="2dp"
+                android:background="#448AFF"
+                android:layout_margin="10dp"/>
 
 
+            <TextView
+                android:id="@+id/newsSoccerTitleTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Sport Bible"
+                android:textAlignment="center"
+                android:textSize="15dp" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerSportsNews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+               android:scrollbarThumbHorizontal="@drawable/sscroll"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbarSize="3dp"/>
 
-    </LinearLayout>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_gravity="center"
+                android:layout_height="2dp"
+                android:background="#ff0000"
+                android:layout_margin="10dp"/>
+
+
+            <TextView
+                android:id="@+id/newsTitleTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Google News"
+                android:textAlignment="center"
+                android:textSize="15dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerHomeNews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarThumbVertical="@drawable/scroll2"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbarSize="3dp"
+
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 
 
