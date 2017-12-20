@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String  url= "https://newsapi.org/v2/";
 
-    private SoccerAPI sportsNewsService;
-    private List<Article> sportNewsArticlesList;
-
+    
+     List<Article> sportNewsArticlesList = new ArrayList<>();
+     RecyclerView recyclerView2;
 
 
     @Override
@@ -59,15 +59,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView    =(RecyclerView)findViewById(R.id.recyclerHomeNews);
+        recyclerView2    =(RecyclerView)findViewById(R.id.recyclerSportsNews);
+
         searchET        =(EditText)findViewById(R.id.searchET);
         new Peticion().execute();
+        new RetrofitCall().execute();
         timer();
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        keyTextListener();
+        LinearLayoutManager linearLayoutManager2= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView2.setLayoutManager(linearLayoutManager2);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerSportsNews);
-        retrofitCall("https://newsapi.org/v2/");
+
+        keyTextListener();//where is setadapter?
+
+
+
+        //recyclerView2 = (RecyclerView) findViewById(R.id.recyclerSportsNews);
     }
 
     private void timer() {
@@ -79,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("RESULTS", "AFTER THREAD ====="+listData.size());
                 NewsAdapter newsAdapter =new NewsAdapter(listData, context);
                 recyclerView.setAdapter(newsAdapter);
+
+                //SIRAN
+
+//                recyclerView2.setHasFixedSize(true);
+                SoccerNewsAdapter soccerNewsAdapter= new SoccerNewsAdapter(sportNewsArticlesList, context);
+                recyclerView2.setAdapter(soccerNewsAdapter);//setadapter
+
+
+
             }
         }, 1000);
     }
@@ -125,34 +142,50 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void retrofitCall(String baseUrl) {
+    public class RetrofitCall extends AsyncTask<Void, String, Void> {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        @Override
+        protected Void doInBackground(Void... voids) {
 
-        sportsNewsService = retrofit.create(SoccerAPI.class);
+            Log.d(TAG, "doInBackground: BACKGROUNDTHREAD");
+            
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://newsapi.org/v2/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            SoccerAPI sportsNewsService= retrofit.create(SoccerAPI.class);
+            sportsNewsService = retrofit.create(SoccerAPI.class);
 
-        Call<SoccerNews> soccerNewsCall = sportsNewsService.getNews();
+            Call<SoccerNews> soccerNewsCall = sportsNewsService.getNews();
 
-        soccerNewsCall.enqueue(new Callback<SoccerNews>() {//call the website link and get information
-            @Override
-            public void onResponse(Call<SoccerNews> call, Response<SoccerNews> response) {
-                sportNewsArticlesList = response.body().getArticleList();
-//////                int x= sportNewsUrl.getArticleList().size();
-                ///     Log.e(TAG, String.valueOf(x));
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL, false));
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(new SoccerNewsAdapter(sportNewsArticlesList));
-            }
+            soccerNewsCall.enqueue(new Callback<SoccerNews>() {
+                @Override
+                public void onResponse(Call<SoccerNews> call, Response<SoccerNews> response) {
+                    Log.d(TAG, "onResponse: ======");
 
-            @Override
-            public void onFailure(Call<SoccerNews> call, Throwable t) {
-                t.printStackTrace();
-            }
+                    response.body().getArticleList();
 
-        });
+                    SoccerNews soccerNews= response.body();
+
+
+                    for(int i=0; i< soccerNews.getArticleList().size(); i++){
+
+                        sportNewsArticlesList.add(soccerNews.getArticleList().get(i));
+                    }
+
+                    Log.d(TAG, "onResponse: "+sportNewsArticlesList.get(0).getUrlToImageSoccer());
+
+                }
+
+                @Override
+                public void onFailure(Call<SoccerNews> call, Throwable t) {
+
+                    Log.d(TAG, "onFailure: ========");
+                }
+            });
+
+            return null;
+        }
     }
 
     public  class Peticion extends AsyncTask<Void, String, Void> {

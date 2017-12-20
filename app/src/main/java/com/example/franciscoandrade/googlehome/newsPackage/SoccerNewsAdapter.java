@@ -24,14 +24,15 @@ import java.util.List;
 
 public class SoccerNewsAdapter extends RecyclerView.Adapter<SoccerNewsAdapter.ViewHolderSoccerNews> {
 
-    private List<Article> articleList;
+     List<Article> articleList;
     Context context;
     String link;
 
-    public SoccerNewsAdapter(List<Article> articleList) {
+    public SoccerNewsAdapter(List<Article> articleList, Context context) {
         this.articleList = articleList;
        this.context = context;
     }
+
 
     @Override
     public SoccerNewsAdapter.ViewHolderSoccerNews onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,18 +46,18 @@ public class SoccerNewsAdapter extends RecyclerView.Adapter<SoccerNewsAdapter.Vi
         holder.newsAuthorSoccer.setText(articleList.get(position).getAuthorSoccer()+"");
         holder.newsSummarySoccer.setText(articleList.get(position).getDescriptionSoccer()+"");
         holder.newsTitleSoccer.setText(articleList.get(position).getTitleSoccer()+"");
-        String url= articleList.get(position).getUrlToImageSoccer();
+        String url= articleList.get(position).getUrlToImageSoccer().toString();
         Picasso.with(holder.newsBackgroundSoccer.getContext()).load(url).fit().into(holder.newsBackgroundSoccer);
         link= articleList.get(position).getUrlSoccer();
 
-        holder.prictureCardSoccer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent= new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(link));
-                context.startActivity(intent);
-            }
-        });
+//        holder.prictureCardSoccer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent= new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(link));
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -80,13 +81,6 @@ public class SoccerNewsAdapter extends RecyclerView.Adapter<SoccerNewsAdapter.Vi
             newsSummarySoccer=(TextView)itemView.findViewById(R.id.newsDescriptionSoccer);
             newsAuthorSoccer=(TextView)itemView.findViewById(R.id.newsAuthorSoccer);
             prictureCardSoccer=(CardView)itemView.findViewById(R.id.prictureCardSoccer);
-        }
-
-        public void bind(String dogBreedImageUrl) {
-            //bind url for image with image
-            Picasso.with(itemView.getContext())
-                    .load(dogBreedImageUrl)
-                    .into(imageView);
         }
     }
 }
