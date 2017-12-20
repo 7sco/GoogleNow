@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Chelsi\GoogleNow\GoogleHome.iml" filepath="C:\Users\Chelsi\GoogleNow\GoogleHome.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GoogleNow.iml" filepath="$PROJECT_DIR$/GoogleNow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GoogleHome.iml" filepath="$PROJECT_DIR$/GoogleHome.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

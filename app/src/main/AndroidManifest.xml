@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".weatherPackage.Weatherctivity"></activity>
+        <activity android:name=".ToDoList"></activity>
     </application>
 
 </manifest>

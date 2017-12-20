@@ -111,18 +111,31 @@ public class Weatherctivity extends AppCompatActivity {
     public class Peticion extends AsyncTask<Void, String, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            final String url = "https://api.darksky.net/forecast/1b839889901b88e5b5e02c421ab7d3ef/";
+            String url = "https://api.darksky.net/forecast/1b839889901b88e5b5e02c421ab7d3ef/";
+//            Retrofit retrofit = new Retrofit.Builder().
+//                          baseUrl(BASE_URL).
+//                           addConverterFactory(GsonConverterFactory.create())
+//                              .build();
+//            RetrofitApiService service = retrofit.create(RetrofitApiService.class);
+//
+//            Call<PeopleResponse> call = service.getPeople();
+
+            //call.enqueue(new Callback<PeopleResponse>() {
+
+
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            ServiceAPI service = retrofit.create(ServiceAPI.class);
+            ServiceAPIWeather service = retrofit.create(ServiceAPIWeather.class);
+
             Call<GetCurrently> response = service.getResponseGet();
 
             response.enqueue(new Callback<GetCurrently>() {
                 @Override
                 public void onResponse(Call<GetCurrently> call, Response<GetCurrently> response) {
+
 
                     long unixSeconds = response.body().getCurrently().getTime();
                     Date date = new Date(unixSeconds * 1000L);
@@ -150,12 +163,14 @@ public class Weatherctivity extends AppCompatActivity {
                         listData.add(response.body().getHourly().getData()[i]);
                     }
                     Log.d("SIZE =====", listData.size()+"");
+
                     publishProgress(currently.getIcon().toString(), hourly.getSummary(), summaryNow, currentDate, currentTemp, feelsTemp);
+
                 }
 
                 @Override
                 public void onFailure(Call<GetCurrently> call, Throwable t) {
-                    Log.d("RESULTS =====", "FAIL+++++++");
+                    Log.d("RESULTS=", "FAIL+++++++");
                 }
             });
 
@@ -169,12 +184,8 @@ public class Weatherctivity extends AppCompatActivity {
             summaryHour.setText(values[1] + "");
             summaryNow.setText(values[2]);
             currentDate.setText(values[3]);
-            currentTemp.setText(values[4] + "\u00b0");
-            feelsTemp.setText(values[5] + "\u00b0");
-
-            setCurrentWeather(values[4] + "\u00b0C");
-
-
+            currentTemp.setText(values[4] + "\u00b0C");
+            feelsTemp.setText(values[5] + "\u00b0C");
         }
 
         @Override
