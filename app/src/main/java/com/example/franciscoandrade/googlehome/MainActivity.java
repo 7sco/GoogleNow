@@ -36,6 +36,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+//DELETE THIS COMMENT, ITS ONLY FOR TESTING
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView        recyclerView;
