@@ -1,9 +1,5 @@
 package com.example.franciscoandrade.googlehome;
 
-/**
- * Created by franciscoandrade on 12/12/17.
- */
-
 class Source {
 
     private String id;

@@ -18,8 +18,8 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolderNews>{
 
     List<GetArticles> listNews;
-    Context context;
-    String link;
+    private Context context;
+    private String link;
 
     public NewsAdapter(List<GetArticles> listNews, Context context) {
         this.listNews = listNews;

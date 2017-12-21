@@ -1,9 +1,5 @@
 package com.example.franciscoandrade.googlehome.weatherPackage;
 
-/**
- * Created by franciscoandrade on 12/11/17.
- */
-
 public class Hourly {
 
     private int time;
@@ -24,10 +20,7 @@ public class Hourly {
     private int uvIndex;
     private int visibility;
     private double ozone;
-
     private Data[] data;
-
-
 
     public int getTime() {
         return time;
@@ -100,7 +93,6 @@ public class Hourly {
     public double getOzone() {
         return ozone;
     }
-
 
     public Data[] getData() {
         return data;

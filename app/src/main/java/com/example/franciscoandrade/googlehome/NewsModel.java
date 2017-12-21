@@ -1,9 +1,5 @@
 package com.example.franciscoandrade.googlehome;
 
-/**
- * Created by franciscoandrade on 12/12/17.
- */
-
 public class NewsModel {
 
     private String title;
@@ -12,7 +8,6 @@ public class NewsModel {
     private String url;
     private String urlImage;
 
-
     public NewsModel(String title, String summary, String author, String url, String urlImage) {
         this.title = title;
         this.summary = summary;
@@ -20,7 +15,6 @@ public class NewsModel {
         this.url = url;
         this.urlImage = urlImage;
     }
-
 
     public String getTitle() {
         return title;

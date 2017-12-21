@@ -1,12 +1,6 @@
 package com.example.franciscoandrade.googlehome.weatherPackage;
 
-/**
- * Created by franciscoandrade on 12/11/17.
- */
-
 public class Data {
-
-
     private int time;
     private String summary;
     private double temperature;
@@ -24,7 +18,6 @@ public class Data {
     public double getTemperature() {
         return temperature;
     }
-
 
     public String getIcon() {
         return icon;

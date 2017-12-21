@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".weatherPackage.Weatherctivity"></activity>
-        <activity android:name=".ToDoList"></activity>
+        <activity android:name=".weatherPackage.Weatherctivity" />
+        <activity android:name=".todoPackage.ToDoActivity"></activity>
     </application>
 
 </manifest>

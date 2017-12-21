@@ -1,9 +1,5 @@
 package com.example.franciscoandrade.googlehome.weatherPackage;
 
-/**
- * Created by franciscoandrade on 12/11/17.
- */
-
 public class HourlyModel {
 
     private String time;
@@ -11,7 +7,6 @@ public class HourlyModel {
     private String feelsTemperature;
     private String summary;
     private String icon;
-
 
     public HourlyModel(String time, String temperature, String feelsTemperature, String summary, String icon) {
         this.time = time;

@@ -1,9 +1,5 @@
 package com.example.franciscoandrade.googlehome.weatherPackage;
 
-/**
- * Created by franciscoandrade on 12/11/17.
- */
-
 public class Currently {
 
     public int time;

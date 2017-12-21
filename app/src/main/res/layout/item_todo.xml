@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/recyclerItemHolder"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:elevation="100dp"
+    card_view:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+
+    android:foreground="?android:selectableItemBackground">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp">
+
+            <TextView
+                android:id="@+id/titleNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:text="Title"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="#ccc"/>
+
+
+            <TextView
+                android:id="@+id/textNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Do HOMEWORK"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:textColor="#757575"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
+
+
+
+
+
+</android.support.v7.widget.CardView>

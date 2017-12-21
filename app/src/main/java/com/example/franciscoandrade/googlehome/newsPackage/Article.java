@@ -53,7 +53,6 @@ public class Article {
         return urlToImageSoccer;
     }
 
-
     public String getPublishedAtSoccer() {
         return publishedAtSoccer;
     }

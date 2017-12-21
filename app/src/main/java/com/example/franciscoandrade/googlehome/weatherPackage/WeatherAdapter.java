@@ -29,28 +29,25 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
     @Override
     public ViewHolderWeather onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view, parent, false);
-
-
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view, parent, false);
         return new ViewHolderWeather(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolderWeather holder, int position) {
-        DateFormat ddf3= DateFormat.getTimeInstance(DateFormat.SHORT, Locale.ENGLISH);
+        DateFormat ddf3 = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.ENGLISH);
         ddf3.setTimeZone(TimeZone.getTimeZone("EST"));
         Date date2;
         long unixSeconds2;
-        unixSeconds2= listData.get(position).getTime();
-        date2= new Date(unixSeconds2*1000L);
-        String time=ddf3.format(date2);
+        unixSeconds2 = listData.get(position).getTime();
+        date2 = new Date(unixSeconds2 * 1000L);
+        String time = ddf3.format(date2);
         holder.timeRV.setText(time);
-        holder.tempRV.setText(String.valueOf((int)listData.get(position).getTemperature())+"\u00b0");
-        holder.feelsTempRV.setText(String.valueOf((int)listData.get(position).getApparentTemperature())+"\u00b0");
-        holder.summaryRV.setText(listData.get(position).getSummary()+"");
+        holder.tempRV.setText(String.valueOf((int) listData.get(position).getTemperature()) + "\u00b0");
+        holder.feelsTempRV.setText(String.valueOf((int) listData.get(position).getApparentTemperature()) + "\u00b0");
+        holder.summaryRV.setText(listData.get(position).getSummary() + "");
 
-        switch (listData.get(position).getIcon()){
+        switch (listData.get(position).getIcon()) {
             case "clear-day":
                 holder.iconRV.setBackgroundResource(R.drawable.weather_clear);
                 break;
@@ -96,13 +93,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
         public ViewHolderWeather(View itemView) {
             super(itemView);
-
-            timeRV=(TextView)itemView.findViewById(R.id.timeRV);
-            tempRV=(TextView)itemView.findViewById(R.id.tempRV);
-            feelsTempRV=(TextView)itemView.findViewById(R.id.feelsTempRV);
-            summaryRV=(TextView)itemView.findViewById(R.id.summaryRV);
-            iconRV=(ImageView) itemView.findViewById(R.id.iconRV);
-
+            timeRV = (TextView) itemView.findViewById(R.id.timeRV);
+            tempRV = (TextView) itemView.findViewById(R.id.tempRV);
+            feelsTempRV = (TextView) itemView.findViewById(R.id.feelsTempRV);
+            summaryRV = (TextView) itemView.findViewById(R.id.summaryRV);
+            iconRV = (ImageView) itemView.findViewById(R.id.iconRV);
         }
     }
 }

@@ -20,7 +20,6 @@ class Articles {
 
     private String url;
 
-
     public String getPublishedAt ()
     {
         return publishedAt;

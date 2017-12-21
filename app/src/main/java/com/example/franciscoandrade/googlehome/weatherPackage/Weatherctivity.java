@@ -39,8 +39,7 @@ public class Weatherctivity extends AppCompatActivity {
     ImageView iconIV;
     RecyclerView recyclerView;
     WeatherAdapter weatherAdapter;
-
-    String currentWeather;
+    private String currentWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +62,13 @@ public class Weatherctivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Do something after 5s = 5000ms
-
                 Log.d("RESULTS", "AFTER THREAD =====" + listData.size());
                 weatherAdapter = new WeatherAdapter(listData);
-
                 recyclerView.setAdapter(weatherAdapter);
-                Log.d("SIZE =====", listData.size()+"");
-
+                Log.d("SIZE =====", listData.size() + "");
             }
         }, 1000);
 
-//        SnapHelper snapHelper = new LinearSnapHelper();
-//        snapHelper.attachToRecyclerView(recyclerView);
         SnapHelper snapHelper2 = new GravitySnapHelper(Gravity.START);
         snapHelper2.attachToRecyclerView(recyclerView);
 
@@ -85,11 +79,9 @@ public class Weatherctivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new Peticion().execute();
-
                 weatherAdapter.notifyDataSetChanged();
             }
         });
-
 
     }
 
@@ -132,30 +124,15 @@ public class Weatherctivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             String url = "https://api.darksky.net/forecast/1b839889901b88e5b5e02c421ab7d3ef/";
-//            Retrofit retrofit = new Retrofit.Builder().
-//                          baseUrl(BASE_URL).
-//                           addConverterFactory(GsonConverterFactory.create())
-//                              .build();
-//            RetrofitApiService service = retrofit.create(RetrofitApiService.class);
-//
-//            Call<PeopleResponse> call = service.getPeople();
-
-            //call.enqueue(new Callback<PeopleResponse>() {
-
-
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-
             ServiceAPIWeather service = retrofit.create(ServiceAPIWeather.class);
-
             Call<GetCurrently> response = service.getResponseGet();
-
             response.enqueue(new Callback<GetCurrently>() {
                 @Override
                 public void onResponse(Call<GetCurrently> call, Response<GetCurrently> response) {
-
 
                     long unixSeconds = response.body().getCurrently().getTime();
                     Date date = new Date(unixSeconds * 1000L);
@@ -182,7 +159,7 @@ public class Weatherctivity extends AppCompatActivity {
                         String format4 = ddf3.format(date2);
                         listData.add(response.body().getHourly().getData()[i]);
                     }
-                    Log.d("SIZE =====", listData.size()+"");
+                    Log.d("SIZE =====", listData.size() + "");
 
                     publishProgress(currently.getIcon().toString(), hourly.getSummary(), summaryNow, currentDate, currentTemp, feelsTemp);
 
@@ -196,7 +173,6 @@ public class Weatherctivity extends AppCompatActivity {
 
             return null;
         }
-
 
         @Override
         protected void onProgressUpdate(String... values) {
@@ -212,7 +188,6 @@ public class Weatherctivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
         }
     }
-
 
     public String getCurrentWeather() {
         return currentWeather;

@@ -24,41 +24,37 @@ import java.util.List;
 
 public class SoccerNewsAdapter extends RecyclerView.Adapter<SoccerNewsAdapter.ViewHolderSoccerNews> {
 
-     List<Article> articleList;
-    Context context;
-    String link;
+    List<Article> articleList;
+    private Context context;
+    private String link;
 
     public SoccerNewsAdapter(List<Article> articleList, Context context) {
         this.articleList = articleList;
-       this.context = context;
+        this.context = context;
     }
-
 
     @Override
     public SoccerNewsAdapter.ViewHolderSoccerNews onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.soccer_news_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.soccer_news_item, parent, false);
         return new SoccerNewsAdapter.ViewHolderSoccerNews(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolderSoccerNews holder, int position) {
-
-        holder.newsAuthorSoccer.setText(articleList.get(position).getAuthorSoccer()+"");
-        holder.newsSummarySoccer.setText(articleList.get(position).getDescriptionSoccer()+"");
-        holder.newsTitleSoccer.setText(articleList.get(position).getTitleSoccer()+"");
-        String url= articleList.get(position).getUrlToImageSoccer().toString();
+        holder.newsAuthorSoccer.setText(articleList.get(position).getAuthorSoccer() + "");
+        holder.newsSummarySoccer.setText(articleList.get(position).getDescriptionSoccer() + "");
+        holder.newsTitleSoccer.setText(articleList.get(position).getTitleSoccer() + "");
+        String url = articleList.get(position).getUrlToImageSoccer().toString();
         Picasso.with(holder.newsBackgroundSoccer.getContext()).load(url).fit().into(holder.newsBackgroundSoccer);
-        link= articleList.get(position).getUrlSoccer();
-
+        link = articleList.get(position).getUrlSoccer();
         holder.prictureCardSoccer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(Intent.ACTION_VIEW);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(link));
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -67,20 +63,20 @@ public class SoccerNewsAdapter extends RecyclerView.Adapter<SoccerNewsAdapter.Vi
     }
 
     public class ViewHolderSoccerNews extends RecyclerView.ViewHolder {
-
         private ImageView imageView;
         ImageView newsBackgroundSoccer;
         TextView newsTitleSoccer;
-        TextView  newsSummarySoccer;
-        TextView  newsAuthorSoccer;
+        TextView newsSummarySoccer;
+        TextView newsAuthorSoccer;
         CardView prictureCardSoccer;
+
         public ViewHolderSoccerNews(View itemView) {
             super(itemView);
-            newsBackgroundSoccer= (ImageView) itemView.findViewById(R.id.newsBackgroundSoccer);
-            newsTitleSoccer=(TextView)itemView.findViewById(R.id.newsTitleSoccer);
-            newsSummarySoccer=(TextView)itemView.findViewById(R.id.newsDescriptionSoccer);
-            newsAuthorSoccer=(TextView)itemView.findViewById(R.id.newsAuthorSoccer);
-            prictureCardSoccer=(CardView)itemView.findViewById(R.id.prictureCardSoccer);
+            newsBackgroundSoccer = (ImageView) itemView.findViewById(R.id.newsBackgroundSoccer);
+            newsTitleSoccer = (TextView) itemView.findViewById(R.id.newsTitleSoccer);
+            newsSummarySoccer = (TextView) itemView.findViewById(R.id.newsDescriptionSoccer);
+            newsAuthorSoccer = (TextView) itemView.findViewById(R.id.newsAuthorSoccer);
+            prictureCardSoccer = (CardView) itemView.findViewById(R.id.prictureCardSoccer);
         }
     }
 }
